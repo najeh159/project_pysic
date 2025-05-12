@@ -1,0 +1,200 @@
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { OrbitControls, Stars, Html, Sphere } from '@react-three/drei';
+import React, { Suspense, useRef } from 'react';
+import * as THREE from 'three';
+
+export default function Home() {
+  return (
+    <main style={{ height: '100vh', background: '#000', display: 'flex', flexDirection: 'row' }}>
+      {/* 3D Scene */}
+      <div style={{ flex: 1 }}>
+        <Canvas camera={{ position: [6, 4, 10], fov: 60 }} shadows>
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[-3, 5, 5]} intensity={1.5} castShadow />
+          <Suspense fallback={null}>
+            <Stars radius={100} depth={50} count={5000} factor={4} fade />
+            <Sun />
+            <Earth sunPosition={[-3, 0, 0]} />
+            <OrbitControls enablePan={false} />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* Information Section */}
+      {/* Information Section */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '20px', color: 'white', background: '#111' }}>
+        <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>الفرق بين الكسوف والخسوف</h1>
+        <p>
+          الفرق بين الكسوف والخسوف، يُمكن تعريف الخسوف على أنّه ظاهرة فلكيّة تحدث عندما يُصبح القمر في ظلّ الأرض، أي يحدث خسوف القمر عندما تكون الأرض بين القمر والشمس، بينما يُمكن تعريف كسوف الشمس على أنّه ظاهرة فلكيّة تحدث عندما يسقط ظلّ القمر على الأرض، أي يحدث كسوف الشمس عندما يكون القمر بين الأرض والشمس.
+        </p>
+        <ul>
+          <li>كسوف الشمس ظاهرة كونية تحدث عندما يكون كل من الشمس والقمر والأرض على استقامة واحدة، بينما خسوف القمر يحدث بسبب وقوع الأرض بين الشمس والقمر.</li>
+          <li>كسوف الشمس يحدث بين مرتين أو ثلاثة في السنة الواحدة، وخسوف القمر ثلاث مرات في السنة كحد أعلى.</li>
+          <li>كسوف الشمس ظاهرة قد تستمر لعدة دقائق، بينما خسوف القمر لعدة ساعات.</li>
+          <li>كسوف الشمس ظاهرة خطر للعين، وتتطلب حمايتها، ولكن خسوف القمر ظاهرة آمنة للعين، ولا تتطلب حمايتها.</li>
+          <li>لا يمكن أن يحدث خسوفا للقمر إلا إذا كان القمر بدرًا في منتصف الشهر العربي، بينما الكسوف لا يمكن أن يحدث إلا إذا كان القمر محاقًا في أول الشهر العربي.</li>
+          <li>في الكسوف الذي يحجب أشعة الشمس عن الأرض، هو القمر بسبب وقوعه بين الشمس والأرض، بينما في الخسوف الذي يحجب قرص الشمس عن القمر هو الأرض لوقوعها بين الشمس والقمر.</li>
+          <li>كسوف الشمس دائماً تحدث في النهار، أما خسوف القمر يحدث ليلاً عندما تغيب الشمس.</li>
+          <li>كسوف الشمس أكثر ندرة، فيتم مشاهدته في مناطق محددة، أما خسوف القمر فيتم مشاهدته من مناطق كثيرة يكون القمر فيها أعلى من الأفق.</li>
+        </ul>
+
+        <h2>أضرار خسوف القمر</h2>
+        <p>
+          أثبتت الدراسات العلمية عدم وجود أي تأثير سلبي على عينيّ الإنسان حين ينظر للقمر وقت الخسوف، أما التأثير السلبي يحدث وقت الكسوف عند النظر لقرص الشمس، واستمر العلماء في البحث كثيراً خلال فترة خسوف القمر، لمعرفة تأثيره على حياة الإنسان، فقاموا بإجراء تجارب على أشخاص متطوعين، وبعد انتهاء الأبحاث اكتشفوا عدة تأثيرات قالوا إنها في الغالب قد تحدث بسبب الخسوف، وقال البعض الآخر إنها مجرد توقعات.
+        </p>
+
+        <h2>أضرار كسوف الشمس</h2>
+        <p>
+          أجمع العلماء على أنَ النظر إلى قرص الشمس أثناء عملية الكسوف يُسبب الضرر، لأن الشمس ترسل أشعة فوق بنفسجية ضارة وأشعة تحت الحمراء غير المرئية، فتذهب مباشرة إلى العين ويمكن أن تدمر الشبكية، وبعد فترة يصاب الشخص بالعمى، لذلك يجب تفادي رؤية الكسوف بالعين المجردة، وارتداء نظارة خاصة للحدث.
+        </p>
+
+        <h2>أسباب خسوف القمر ومدته</h2>
+        <ul>
+          <li>يحدث عندما تقع الأرض في المنتصف بين القمر والشمس، فيقع ظل الأرض على القمر، فتحجب الضوء عن القمر فيحدث وقتها خسوف للقمر.</li>
+          <li>إذا حجبت الأرض الضوء عن القمر بشكل كامل فيصبح خسوف كلياً، ويظهر لونه أحمر ويستمر 84 ثانية أو أكثر.</li>
+          <li>إذا حجبت الأرض جزءاً من القمر فيصبح خسوف جزئياً، ولا يتعدى مدته 3 ساعات.</li>
+        </ul>
+
+        <h2>أسباب كسوف الشمس ومدته</h2>
+        <ul>
+          <li>عندما يقع القمر في المنتصف بين الشمس والأرض، فيمنع أشعة الشمس من السقوط على الأرض.</li>
+          <li>وقوع الظليل وهو شبه ظل القمر، فيقع على منطقة معينة من الأرض، فتحجب أشعة الشمس عن تلك المنطقة فقط، وقد يستمر لمدة ساعتين.</li>
+        </ul>
+
+        <h2>الكسوف والخسوف في الإسلام</h2>
+        <p>
+          تُصلى صلاة الكسوف والخسوف في أي وقت يحصل فيه الخسوف سواء في الليل أو النهار، وهي من السنن المؤكدة وعدد ركعاتها ركعتان، وينادى الإمام للصلاة بقول: الصلاة جامعة، وعندما حدث كسوف للشمس في عهد سيدنا محمد -صلى الله عليه وسلم- فقام فزعاً وذهب للمسجد ليصلي، فعن عائشة -رضي الله عنها وأرضاها- قالت: إن الشمس خسفت على عهد رسول الله صلى الله عليه، وسلم “فبعث منادياً ينادي الصلاة جامعة فاجتمعوا وتقدم فكبر وصلى أربع ركعات في ركعتين وأربع سجدات” رواه مسلم.
+        </p>
+      </div>
+    </main>
+  );
+}
+
+function Sun() {
+  const sunTexture = useLoader(THREE.TextureLoader, '/textures/2k_sun.jpg');
+  return (
+    <Sphere position={[-3, 0, 0]} args={[1.2, 64, 64]} castShadow receiveShadow>
+      <meshStandardMaterial map={sunTexture} emissive="orange" emissiveIntensity={2} />
+      <Html center position={[0, 1.5, 0]}>
+        <div style={{ color: 'white', fontSize: '12px' }}>الشمس</div>
+      </Html>
+    </Sphere>
+  );
+}
+
+let eclipseLocked = false;
+
+function checkAlignment(a, b, c, threshold = 0.1) {
+  const ab = new THREE.Vector3().subVectors(b, a).normalize();
+  const cb = new THREE.Vector3().subVectors(b, c).normalize();
+  const angle = ab.angleTo(cb);
+  return angle < threshold;
+}
+
+function triggerEclipse(setInfo, setPause, title, message) {
+  if (eclipseLocked) return;
+  eclipseLocked = true;
+
+  setPause(true);
+  setInfo({ title, message });
+
+  setTimeout(() => {
+    setInfo(null);
+    setPause(false);
+    eclipseLocked = false;
+  }, 3000);
+}
+
+
+function Earth({ sunPosition }) {
+  const earthGroup = useRef();
+  const moonRef = useRef();
+  const [eclipseInfo, setEclipseInfo] = React.useState(null);
+  const [isPaused, setIsPaused] = React.useState(false);
+
+  const earthTexture = useLoader(THREE.TextureLoader, '/textures/earthmap1k.jpg');
+  const bumpTexture = useLoader(THREE.TextureLoader, '/textures/earthbump1k.jpg');
+  const specularTexture = useLoader(THREE.TextureLoader, '/textures/earthspec1k.jpg');
+
+  useFrame(({ clock }) => {
+    if (isPaused) return;
+  
+    const t = clock.getElapsedTime();
+  
+    // Earth orbit
+    const earthOrbitRadius = 5;
+    const earthX = sunPosition[0] + Math.sin(t) * earthOrbitRadius;
+    const earthZ = sunPosition[2] + Math.cos(t) * earthOrbitRadius;
+    const earthPos = new THREE.Vector3(earthX, 0, earthZ);
+    earthGroup.current.position.copy(earthPos);
+  
+    // Moon orbit
+    const moonOrbitRadius = 1.5;
+    const moonX = Math.sin(t * 2) * moonOrbitRadius;
+    const moonZ = Math.cos(t * 2) * moonOrbitRadius;
+    const moonPos = new THREE.Vector3(moonX, 0, moonZ);
+    moonRef.current.position.copy(moonPos);
+  
+    // Get moon position in world
+    const moonWorldPos = moonRef.current.getWorldPosition(new THREE.Vector3());
+  
+    // Eclipse detection
+    const isSolarEclipse = checkAlignment(moonWorldPos, earthPos, sunPosition);
+    const isLunarEclipse = checkAlignment(earthPos, moonWorldPos, sunPosition);
+  
+    if (isSolarEclipse) {
+      triggerEclipse(setEclipseInfo, setIsPaused, 'كسوف شمسي', 'القمر يحجب ضوء الشمس عن الأرض.');
+      console.log('كسوف شمسي');
+    } else if (isLunarEclipse) {
+      triggerEclipse(setEclipseInfo, setIsPaused, 'خسوف قمري', 'الأرض تحجب ضوء الشمس عن القمر.');
+      console.log('خسوف قمري');
+    }
+  });
+  
+
+  return (
+    <group ref={earthGroup}>
+      {/* Earth */}
+      <Sphere args={[0.7, 64, 64]} castShadow receiveShadow>
+        <meshPhongMaterial
+          map={earthTexture}
+          bumpMap={bumpTexture}
+          bumpScale={0.05}
+          specularMap={specularTexture}
+          specular={new THREE.Color('grey')}
+        />
+        <Html center position={[0, 1.2, 0]}>
+          <div style={{ color: 'white', fontSize: '12px' }}>الأرض</div>
+        </Html>
+      </Sphere>
+
+      {/* Moon */}
+      <group ref={moonRef}>
+        <Sphere args={[0.2, 32, 32]} castShadow receiveShadow>
+          <meshStandardMaterial color="gray" />
+          <Html center position={[0, 0.4, 0]}>
+            <div style={{ color: 'white', fontSize: '10px' }}>القمر</div>
+          </Html>
+        </Sphere>
+      </group>
+
+      {/* Eclipse Info Popup */}
+      {eclipseInfo && (
+        <Html position={[0, 2, 0]}>
+          <div style={{
+            background: 'rgba(0,0,0,0.8)',
+            padding: '15px',
+            borderRadius: '10px',
+            color: 'white',
+            textAlign: 'center',
+            fontSize: '14px'
+          }}>
+            <strong>{eclipseInfo.title}</strong>
+            <p>{eclipseInfo.message}</p>
+          </div>
+        </Html>
+      )}
+    </group>
+  );
+}
+
