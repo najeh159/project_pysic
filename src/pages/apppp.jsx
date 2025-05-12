@@ -89,7 +89,7 @@ export default function Home() {
     <div style={{ width: '100vw', height: '100vh', background: 'black', display: 'flex', flexDirection: 'row' }}>
       <a
         onClick={() => {
-          window.location.href = "/kousouf__5ousouf";
+           window.location = "https://projet-physic2.vercel.app/";
         }}
         style={{
           position: 'absolute',
